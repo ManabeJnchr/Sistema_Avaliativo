@@ -51,7 +51,8 @@ public class SetorController extends HttpServlet {
                 case 2 -> {
                     try {
                         request.setAttribute("lista", setorDAO.buscarSetores());
-                        RequestDispatcher rd = request.getRequestDispatcher("/exibe_setores.jsp");
+                        // RequestDispatcher rd = request.getRequestDispatcher("/exibe_setores.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("/ListarSetores.html");
                         rd.forward(request, response);
                     } catch (Exception e) {
                         response.sendRedirect("ExibeResultado.jsp?result=2");

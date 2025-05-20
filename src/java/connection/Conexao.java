@@ -21,7 +21,7 @@ public class Conexao {
     public Conexao() {
         bd = "jdbc:mysql://localhost:3306/sistema_avaliacao";
         usuario = "root";
-        senha = "lucas4321";
+        senha = "root";
         con = null;
     }
 
