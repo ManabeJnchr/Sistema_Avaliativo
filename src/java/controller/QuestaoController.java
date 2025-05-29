@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dao.SetorDAO;
+import dao.QuestaoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -12,13 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import vo.SetorVO;
+import vo.QuestaoVO;
 
 /**
  *
  * @author José Victor, Lucas Felipe, Lucas Samuel
  */
-public class SetorController extends HttpServlet {
+public class QuestaoController extends HttpServlet {
 
     /**
      * Processa requisições HTTP tanto do tipo <code>GET</code> quanto <code>POST</code>.
@@ -32,45 +32,43 @@ public class SetorController extends HttpServlet {
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
             int operacao = Integer.parseInt(request.getParameter("acao"));
-            SetorDAO setorDAO = new SetorDAO();
+            QuestaoDAO questaoDAO = new QuestaoDAO();
             
             switch (operacao) {
                 // Inserção no banco de dados
                 case 1 -> {
-                    SetorVO setor = new SetorVO();
-                    setor.setNome(request.getParameter("nomeSetor"));                    
+                    QuestaoVO questao = new QuestaoVO();
+                    questao.setQuestao(request.getParameter("questao"));                    
                     try {
-                        setorDAO.inserirSetor(setor);
-                        response.sendRedirect("/Sistema_Avaliativo/CadastroQuestao.html");
-                        // response.sendRedirect("ExibeResultado.jsp?result=1");
-                    } catch (Exception e) {
-                        // response.sendRedirect("ExibeResultado.jsp?result=2");
-                        response.sendRedirect("/Sistema_Avaliativo/CadastroQuestao.html");
-                    }
-                }
-                
-                // Listagem dos dados
-                case 2 -> {
-                    try {
-                        request.setAttribute("lista", setorDAO.buscarSetores());
-                        // RequestDispatcher rd = request.getRequestDispatcher("/exibe_setores.jsp");
-                        RequestDispatcher rd = request.getRequestDispatcher("/ListarSetores.html");
-                        rd.forward(request, response);
-                    } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
-                    }
-                }
-                
-                // Exclusão dos dados
-                case 3 -> {
-                    int id_setor = Integer.parseInt(request.getParameter("id_setor"));
-                    try {
-                        setorDAO.excluirSetor(id_setor);
+                        questaoDAO.inserirQuestao(questao);
                         response.sendRedirect("ExibeResultado.jsp?result=1");
                     } catch (Exception e) {
                         response.sendRedirect("ExibeResultado.jsp?result=2");
                     }
                 }
+                
+                // Listagem dos dados
+                // case 2 -> {
+                //     try {
+                //         request.setAttribute("lista", questaoDAO.buscarQuestao());
+                //         // RequestDispatcher rd = request.getRequestDispatcher("/exibe_questoes.jsp");
+                //         RequestDispatcher rd = request.getRequestDispatcher("/ListarQuestoes.html");
+                //         rd.forward(request, response);
+                //     } catch (Exception e) {
+                //         response.sendRedirect("ExibeResultado.jsp?result=2");
+                //     }
+                // }
+                
+                // Exclusão dos dados
+                // case 3 -> {
+                //     int id_questao = Integer.parseInt(request.getParameter("id_questao"));
+                //     try {
+                //         quetaoDAO.excluirQuestao(id_questao);
+                //         response.sendRedirect("ExibeResultado.jsp?result=1");
+                //     } catch (Exception e) {
+                //         response.sendRedirect("ExibeResultado.jsp?result=2");
+                //     }
+                // }
             }
         }
     }
@@ -89,6 +87,6 @@ public class SetorController extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Controller para operações relacionadas ao Setor.";
+        return "Controller para operações relacionadas ao Questoes.";
     }
 }
