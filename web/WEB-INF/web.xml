@@ -5,6 +5,7 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
          version="3.0">
 
+    <!-- Servlet de cadastro de setores -->
     <servlet>
         <servlet-name>SetorController</servlet-name>
         <servlet-class>controller.SetorController</servlet-class>
@@ -15,7 +16,20 @@
         <url-pattern>/SetorController</url-pattern>
     </servlet-mapping>
 
+    <!-- Servlet de cadastro de questões -->
+    <servlet>
+        <servlet-name>QuestaoController</servlet-name>
+        <servlet-class>controller.QuestaoController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>QuestaoController</servlet-name>
+        <url-pattern>/QuestaoController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Página inicial do sistema -->
     <welcome-file-list>
-        <welcome-file>CadastroSetor.html</welcome-file>
+        <welcome-file>HomeAvaliacao.html</welcome-file>
     </welcome-file-list>
+
 </web-app>

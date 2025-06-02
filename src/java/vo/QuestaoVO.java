@@ -12,9 +12,9 @@ import java.sql.Timestamp;
  */
 public class QuestaoVO {
     private int id;
-    private String questao;
-    private Timestamp dataCriacao;
-    private Timestamp dataAtualizacao;
+    private String pergunta;
+    // private Timestamp dataCriacao;
+    // private Timestamp dataAtualizacao;
 
     // Getters e Setters
     public int getId() {
@@ -25,27 +25,27 @@ public class QuestaoVO {
         this.id = id;
     }
 
-    public String getQuestao() {
-        return questao;
+    public String getPergunta() {
+        return pergunta;
     }
 
-    public void setQuestao(String questao) {
-        this.questao = questao;
+    public void setPergunta(String pergunta) {
+        this.pergunta = pergunta;
     }
 
-    public Timestamp getDataCriacao() {
-        return dataCriacao;
-    }
+    // public Timestamp getDataCriacao() {;
+    //     return dataCriacao;
+    // }
 
-    public void setDataCriacao(Timestamp dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
+    // public void setDataCriacao(Timestamp dataCriacao) {
+    //     this.dataCriacao = dataCriacao;
+    // }
 
-    public Timestamp getDataAtualizacao() {
-        return dataAtualizacao;
-    }
+    // public Timestamp getDataAtualizacao() {
+    //     return dataAtualizacao;
+    // }
 
-    public void setDataAtualizacao(Timestamp dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
-    }
+    // public void setDataAtualizacao(Timestamp dataAtualizacao) {
+    //     this.dataAtualizacao = dataAtualizacao;
+    // }
 }

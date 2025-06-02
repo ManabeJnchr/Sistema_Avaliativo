@@ -31,6 +31,9 @@ public class SetorController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
+            
+            request.setCharacterEncoding("UTF-8");
+
             int operacao = Integer.parseInt(request.getParameter("acao"));
             SetorDAO setorDAO = new SetorDAO();
             
@@ -41,11 +44,11 @@ public class SetorController extends HttpServlet {
                     setor.setNome(request.getParameter("nomeSetor"));                    
                     try {
                         setorDAO.inserirSetor(setor);
-                        response.sendRedirect("/Sistema_Avaliativo/CadastroQuestao.html");
+                        response.sendRedirect("HomeAvaliacao.html");
                         // response.sendRedirect("ExibeResultado.jsp?result=1");
                     } catch (Exception e) {
                         // response.sendRedirect("ExibeResultado.jsp?result=2");
-                        response.sendRedirect("/Sistema_Avaliativo/CadastroQuestao.html");
+                        response.sendRedirect("HomeAvaliacao.html");
                     }
                 }
                 

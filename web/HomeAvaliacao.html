@@ -31,33 +31,37 @@
             <div class="col-11 col-sm-9 col-md-8 rounded-5 py-2" style="background-color: #FFFFFF; position: relative; top: -20px;">
                 <div class="row justify-content-end">
                     <div class="col-12 col-sm-10 col-md-8">
-                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3"> Cadastro de Setor</h4>
+                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3"> Selecione o setor
+                            para
+                            avaliar</h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
-                        <!-- Link para Home Page -->
-                        <a href="HomeAvaliacao.html" class="text-decoration-none text-black mx-2"
-                            style="font-size: larger;" title="Home Page">
-                            <i class="mdi mdi-home-outline"></i>
+                        <!-- Link para Cadastro de Setor -->
+                        <a href="CadastroSetor.html" class="text-decoration-none text-black mx-2"
+                            style="font-size: larger;" title="Cadastrar Setor">
+                            <i class="mdi mdi-domain-plus"></i>
                         </a>
+
+                        <!-- Link para Cadastro de Questão -->
+                        <a href="CadastroQuestao.html" class="text-decoration-none text-black mx-2"
+                            style="font-size: larger;" title="Cadastrar Questão">
+                            <i class="mdi mdi-comment-plus-outline"></i>
+                        </a>
+
                     </div>
                 </div>
-                <form method="post" action="SetorController?acao=1" accept-charset="UTF-8">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-5">
-                                <label for="nomeSetor" class="form-label"><span
-                                        class="fw-bold mdi mdi-hospital-building"> Nome do Setor:</span></label>
-                                <input type="text" class="form-control" id="nomeSetor" name="nomeSetor"
-                                    placeholder="Digite o nome do setor...">
-                            </div>
-                        </div>
+                <div class="row overflow-y-auto" style="max-height: 60vh;">
+                    <div class="col-6 col-md-4 col-lg-3 col-xl-2 text-center">
+                        <button class="btn p-0 m-2 mb-0 bg-transparent"
+                            onclick="window.location.href='https://www.google.com'">
+                            <figure class="figure mb-0">
+                                <img src="img/emergencia.png" class="figure-img img-fluid rounded mb-0"
+                                    alt="Emergência">
+                            </figure>
+                        </button>
+                        <span class="fw-bold" style="font-size: small;">EMERGÊNCIA</span>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-8 text-end">
-                            <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
