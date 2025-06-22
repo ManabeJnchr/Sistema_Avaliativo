@@ -21,9 +21,10 @@ public class SetorDAO {
 
     public void inserirSetor(SetorVO setor) throws SQLException {
         Connection con = new Conexao().estabeleceConexao();
-        String sql = "INSERT INTO setor (nome) VALUES (?)";
+        String sql = "INSERT INTO setor (nome, status) VALUES (?, ?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, setor.getNome());
+        ps.setString(2, "ativo");
         ps.executeUpdate();
         ps.close();
         con.close();
@@ -31,7 +32,7 @@ public class SetorDAO {
 
     public List<SetorVO> buscarSetores() throws SQLException {
         Connection con = new Conexao().estabeleceConexao();
-        String sql = "SELECT * FROM setor";
+        String sql = "SELECT * FROM setor WHERE status = 'ativo'";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
@@ -40,8 +41,9 @@ public class SetorDAO {
             SetorVO setor = new SetorVO();
             setor.setId(rs.getInt("id"));
             setor.setNome(rs.getString("nome"));
-            setor.setDataCriacao(rs.getTimestamp("data_criacao"));
-            setor.setDataAtualizacao(rs.getTimestamp("data_atualizacao"));
+            setor.setStatus(rs.getString("status"));
+            setor.setData_cadastro(rs.getTimestamp("data_cadastro"));
+            setor.setData_atualizacao(rs.getTimestamp("data_atualizacao"));
             setores.add(setor);
         }
 
@@ -51,11 +53,21 @@ public class SetorDAO {
         return setores;
     }
 
-    public void excluirSetor(int id_setor) throws SQLException { 
+    public void excluirSetor(int id) throws SQLException { 
         Connection con = new Conexao().estabeleceConexao();
-        String sql = "DELETE FROM setor WHERE id_setor = ?"; 
+        String sql = "DELETE FROM setor WHERE id = ?"; 
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id_setor); 
+        ps.setInt(1, id); 
+        ps.executeUpdate();
+        ps.close();
+        con.close();
+    }
+
+    public void inativarSetor(int id) throws SQLException { 
+        Connection con = new Conexao().estabeleceConexao();
+        String sql = "UPDATE setor SET status = 'inativo' WHERE id = ?"; 
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id); 
         ps.executeUpdate();
         ps.close();
         con.close();

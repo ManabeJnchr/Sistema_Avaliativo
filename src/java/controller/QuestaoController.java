@@ -7,6 +7,7 @@ package controller;
 import dao.QuestaoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,20 +34,58 @@ public class QuestaoController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             request.setCharacterEncoding("UTF-8");
-            
+
             int operacao = Integer.parseInt(request.getParameter("acao"));
             QuestaoDAO questaoDAO = new QuestaoDAO();
-            
+
             switch (operacao) {
                 // Inserção no banco de dados
                 case 1 -> {
                     QuestaoVO questao = new QuestaoVO();
-                    questao.setPergunta(request.getParameter("pergunta"));                    
+                    questao.setPergunta(request.getParameter("pergunta"));
+                    questao.setStatus("ativo");
                     try {
                         questaoDAO.inserirQuestao(questao);
                         response.sendRedirect("HomeAvaliacao.html");
                     } catch (Exception e) {
                         response.sendRedirect("HomeAvaliacao.html");
+                    }
+                }
+
+                // Listagem dos dados
+                case 2 -> {
+                    try {
+                        List<QuestaoVO> questoes = questaoDAO.buscarQuestoes();
+                        request.setAttribute("lista", questoes);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeQuestoes.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                    }
+                }
+
+                // Exclusão física (opcional)
+                case 3 -> {
+                    int id = Integer.parseInt(request.getParameter("id_questao"));
+                    try {
+                        questaoDAO.excluirQuestao(id);
+                        response.sendRedirect("ExibeResultado.jsp?result=1");
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                    }
+                }
+
+                // Inativação lógica
+                case 4 -> {
+                    int id = Integer.parseInt(request.getParameter("id_questao"));
+                    try {
+                        questaoDAO.inativarQuestao(id);
+                        List<QuestaoVO> questoes = questaoDAO.buscarQuestoes();
+                        request.setAttribute("lista", questoes);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeQuestoes.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeResultado.jsp?result=2");
                     }
                 }
             }
@@ -67,6 +106,6 @@ public class QuestaoController extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Controller para operações relacionadas ao Questoes.";
+        return "Controller para operações relacionadas a Questao.";
     }
 }

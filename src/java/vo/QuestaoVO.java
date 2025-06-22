@@ -13,8 +13,9 @@ import java.sql.Timestamp;
 public class QuestaoVO {
     private int id;
     private String pergunta;
-    // private Timestamp dataCriacao;
-    // private Timestamp dataAtualizacao;
+    private String status; // 'ativo' ou 'inativo'
+    private Timestamp data_cadastro;
+    private Timestamp data_atualizacao;
 
     // Getters e Setters
     public int getId() {
@@ -33,19 +34,27 @@ public class QuestaoVO {
         this.pergunta = pergunta;
     }
 
-    // public Timestamp getDataCriacao() {;
-    //     return dataCriacao;
-    // }
+    public String getStatus() {
+        return status;
+    }
 
-    // public void setDataCriacao(Timestamp dataCriacao) {
-    //     this.dataCriacao = dataCriacao;
-    // }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-    // public Timestamp getDataAtualizacao() {
-    //     return dataAtualizacao;
-    // }
+    public Timestamp getData_cadastro() {
+        return data_cadastro;
+    }
 
-    // public void setDataAtualizacao(Timestamp dataAtualizacao) {
-    //     this.dataAtualizacao = dataAtualizacao;
-    // }
+    public void setData_cadastro(Timestamp data_cadastro) {
+        this.data_cadastro = data_cadastro;
+    }
+
+    public Timestamp getData_atualizacao() {
+        return data_atualizacao;
+    }
+
+    public void setData_atualizacao(Timestamp data_atualizacao) {
+        this.data_atualizacao = data_atualizacao;
+    }
 }

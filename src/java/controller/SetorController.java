@@ -7,6 +7,7 @@ package controller;
 import dao.SetorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,13 +42,12 @@ public class SetorController extends HttpServlet {
                 // Inserção no banco de dados
                 case 1 -> {
                     SetorVO setor = new SetorVO();
-                    setor.setNome(request.getParameter("nomeSetor"));                    
+                    setor.setNome(request.getParameter("nomeSetor"));
+                    setor.setStatus("ativo");
                     try {
                         setorDAO.inserirSetor(setor);
                         response.sendRedirect("HomeAvaliacao.html");
-                        // response.sendRedirect("ExibeResultado.jsp?result=1");
                     } catch (Exception e) {
-                        // response.sendRedirect("ExibeResultado.jsp?result=2");
                         response.sendRedirect("HomeAvaliacao.html");
                     }
                 }
@@ -55,9 +55,9 @@ public class SetorController extends HttpServlet {
                 // Listagem dos dados
                 case 2 -> {
                     try {
-                        request.setAttribute("lista", setorDAO.buscarSetores());
-                        // RequestDispatcher rd = request.getRequestDispatcher("/exibe_setores.jsp");
-                        RequestDispatcher rd = request.getRequestDispatcher("/ListarSetores.html");
+                        List<SetorVO> setores = setorDAO.buscarSetores();
+                        request.setAttribute("lista", setores);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeSetores.jsp");
                         rd.forward(request, response);
                     } catch (Exception e) {
                         response.sendRedirect("ExibeResultado.jsp?result=2");
@@ -66,10 +66,24 @@ public class SetorController extends HttpServlet {
                 
                 // Exclusão dos dados
                 case 3 -> {
-                    int id_setor = Integer.parseInt(request.getParameter("id_setor"));
+                    int id = Integer.parseInt(request.getParameter("id_setor"));
                     try {
-                        setorDAO.excluirSetor(id_setor);
+                        setorDAO.excluirSetor(id);
                         response.sendRedirect("ExibeResultado.jsp?result=1");
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                    }
+                }
+                
+                // Inativação dos dados
+                case 4 -> {
+                    int id = Integer.parseInt(request.getParameter("id_setor"));
+                    try {
+                        setorDAO.inativarSetor(id);
+                        List<SetorVO> setores = setorDAO.buscarSetores();
+                        request.setAttribute("lista", setores);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeSetores.jsp");
+                        rd.forward(request, response);
                     } catch (Exception e) {
                         response.sendRedirect("ExibeResultado.jsp?result=2");
                     }
