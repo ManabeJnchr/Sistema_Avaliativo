@@ -72,4 +72,15 @@ public class SetorDAO {
         ps.close();
         con.close();
     }
+
+    public void editarSetor(SetorVO setor) throws SQLException {
+        Connection con = new Conexao().estabeleceConexao();
+        String sql = "UPDATE setor SET nome = ? WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, setor.getNome());
+        ps.setInt(2, setor.getId());
+        ps.executeUpdate();
+        ps.close();
+        con.close();
+    }
 }

@@ -60,7 +60,7 @@ public class SetorController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("/ExibeSetores.jsp");
                         rd.forward(request, response);
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeSetores.jsp?result=2");
                     }
                 }
                 
@@ -69,9 +69,9 @@ public class SetorController extends HttpServlet {
                     int id = Integer.parseInt(request.getParameter("id_setor"));
                     try {
                         setorDAO.excluirSetor(id);
-                        response.sendRedirect("ExibeResultado.jsp?result=1");
+                        response.sendRedirect("ExibeSetores.jsp?result=1");
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeSetores.jsp?result=2");
                     }
                 }
                 
@@ -85,7 +85,26 @@ public class SetorController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("/ExibeSetores.jsp");
                         rd.forward(request, response);
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeSetores.jsp?result=2");
+                    }
+                }
+                
+                // Edição dos dados
+                case 5 -> {
+                    int id = Integer.parseInt(request.getParameter("id_setor"));
+                    String nome = request.getParameter("nomeSetor");
+                    try {
+                        SetorVO setor = new SetorVO();
+                        setor.setId(id);
+                        setor.setNome(nome);
+                        setorDAO.editarSetor(setor);
+                        // Atualiza a lista após edição
+                        List<SetorVO> setores = setorDAO.buscarSetores();
+                        request.setAttribute("lista", setores);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeSetores.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeSetores.jsp?result=2");
                     }
                 }
             }

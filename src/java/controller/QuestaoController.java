@@ -60,7 +60,7 @@ public class QuestaoController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("/ExibeQuestoes.jsp");
                         rd.forward(request, response);
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeQuestoes.jsp?result=2");
                     }
                 }
 
@@ -69,9 +69,9 @@ public class QuestaoController extends HttpServlet {
                     int id = Integer.parseInt(request.getParameter("id_questao"));
                     try {
                         questaoDAO.excluirQuestao(id);
-                        response.sendRedirect("ExibeResultado.jsp?result=1");
+                        response.sendRedirect("ExibeQuestoes.jsp?result=1");
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeQuestoes.jsp?result=2");
                     }
                 }
 
@@ -85,7 +85,7 @@ public class QuestaoController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("/ExibeQuestoes.jsp");
                         rd.forward(request, response);
                     } catch (Exception e) {
-                        response.sendRedirect("ExibeResultado.jsp?result=2");
+                        response.sendRedirect("ExibeQuestoes.jsp?result=2");
                     }
                 }
             }
