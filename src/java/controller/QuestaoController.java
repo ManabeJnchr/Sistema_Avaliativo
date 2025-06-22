@@ -88,6 +88,25 @@ public class QuestaoController extends HttpServlet {
                         response.sendRedirect("ExibeQuestoes.jsp?result=2");
                     }
                 }
+
+                // Edição de questão
+                case 5 -> {
+                    int id = Integer.parseInt(request.getParameter("id_questao"));
+                    String pergunta = request.getParameter("pergunta");
+                    try {
+                        QuestaoVO questao = new QuestaoVO();
+                        questao.setId(id);
+                        questao.setPergunta(pergunta);
+                        questaoDAO.editarQuestao(questao);
+                        // Atualiza a lista após edição
+                        List<QuestaoVO> questoes = questaoDAO.buscarQuestoes();
+                        request.setAttribute("lista", questoes);
+                        RequestDispatcher rd = request.getRequestDispatcher("/ExibeQuestoes.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception e) {
+                        response.sendRedirect("ExibeQuestoes.jsp?result=2");
+                    }
+                }
             }
         }
     }

@@ -2,7 +2,7 @@
 Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José Victor, Lucas Felipe, Lucas Samuel
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
 <%@page import="vo.SetorVO" %>
 <%@page import="java.text.SimpleDateFormat" %>
@@ -20,6 +20,7 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
         crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -30,7 +31,7 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                 <img style="height: 28vh;" src="img/plus.png" alt="Ícone de adição">
             </div>
             <div class="col-6 h-100" style="justify-items: center;">
-                <a href="HomeAvaliacao.html">
+                <a href="SetorController?acao=6">
                     <img style="height: 80%;" src="img/logo_hospital_central.png"
                         alt="Logo do Hospital Central">
                 </a>
@@ -57,7 +58,7 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                             style="font-size: larger;" title="Cadastrar Setor">
                             <i class="mdi mdi-domain-plus"></i>
                         </a>
-                        <a href="HomeAvaliacao.html"
+                        <a href="SetorController?acao=6"
                             class="text-decoration-none text-black mx-2"
                             style="font-size: larger;" title="Home Page">
                             <i class="mdi mdi-home-outline"></i>
@@ -78,8 +79,8 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy
-                                        HH:mm:ss"); List<SetorVO> setores = (List<SetorVO>)
+                                    <% SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                        List<SetorVO> setores = (List<SetorVO>)
                                             request.getAttribute("lista");
                                             if (setores != null && !setores.isEmpty()) {
                                             for (SetorVO setor : setores) {
@@ -142,17 +143,17 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
     <div class="modal fade" id="modalEditarSetor" tabindex="-1"
         aria-labelledby="modalEditarSetorLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form method="post" action="SetorController?acao=5">
+            <form method="post" action="SetorController?acao=5" accept-charset="UTF-8">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditarSetorLabel">Editar Setor</h5>
+                    <div class="modal-header" style="background-color: #1A80D9;">
+                        <h5 class="modal-title text-white" id="modalEditarSetorLabel">Editar Setor</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Fechar"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="edit-id-setor" name="id_setor">
                         <div class="mb-3">
-                            <label for="edit-nome-setor" class="form-label">Nome do
+                            <label for="edit-nome-setor" class="form-label fw-bold">Nome do
                                 Setor</label>
                             <input type="text" class="form-control" id="edit-nome-setor"
                                 name="nomeSetor" required>
@@ -161,7 +162,7 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-custom-blue">Salvar</button>
                     </div>
                 </div>
             </form>

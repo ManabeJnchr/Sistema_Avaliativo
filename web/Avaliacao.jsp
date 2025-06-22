@@ -29,11 +29,11 @@
             </div>
         </header>
         <div class="row justify-content-center" style="height: 70vh;">
-            <div class="col-11 col-sm-9 col-md-8 rounded-5 py-2"
-                style="background-color: #FFFFFF; position: relative; top: -20px;">
+            <div class="col-11 col-sm-9 col-md-8 rounded-5 py-2" style="background-color: #FFFFFF; position: relative; top: -20px;">
                 <div class="row justify-content-end">
                     <div class="col-12 col-sm-10 col-md-8">
-                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3"> Cadastro de Questões
+                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3">
+                            Setor: ${nome_setor}
                         </h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
@@ -42,25 +42,28 @@
                             style="font-size: larger;" title="Home Page">
                             <i class="mdi mdi-home-outline"></i>
                         </a>
+
                     </div>
                 </div>
-                <form method="post" action="QuestaoController?acao=1">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-5">
-                                <label for="pergunta" class="form-label"><span class="fw-bold mdi mdi-hospital-building">
-                                        Questão:</span></label>
-                                <input type="text" class="form-control" id="pergunta" name="pergunta"
-                                    placeholder="Digite a sua pergunta...">
+                <div class="row overflow-y-auto" style="max-height: 60vh;">
+                    <div class="col-12 text-center">
+                        <h3>Pergunta ${indice + 1} de ${total}</h3>
+                        <p>${questao.pergunta}</p>
+                        <form method="post" action="AvaliacaoController">
+                            <input type="hidden" name="acao" value="2">
+                            <input type="hidden" name="id_setor" value="${id_setor}">
+                            <input type="hidden" name="indice" value="${indice}">
+                            <div class="btn-group" role="group">
+                                <button type="submit" name="nota" value="0" class="btn btn-primary mx-1">0</button>
+                                <button type="submit" name="nota" value="1" class="btn btn-primary mx-1">1</button>
+                                <button type="submit" name="nota" value="2" class="btn btn-primary mx-1">2</button>
+                                <button type="submit" name="nota" value="3" class="btn btn-primary mx-1">3</button>
+                                <button type="submit" name="nota" value="4" class="btn btn-primary mx-1">4</button>
+                                <button type="submit" name="nota" value="5" class="btn btn-primary mx-1">5</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-8 text-end">
-                            <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

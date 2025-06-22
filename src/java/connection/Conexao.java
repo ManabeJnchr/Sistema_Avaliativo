@@ -19,7 +19,7 @@ public class Conexao {
     private Connection con;
 
     public Conexao() {
-        bd = "jdbc:mysql://localhost:3306/sistema_avaliacao";
+        bd = "jdbc:mysql://localhost:3306/sistema_avaliacao?useUnicode=true&characterEncoding=UTF-8";
         usuario = "root";
         senha = "lucas4321";
         con = null;

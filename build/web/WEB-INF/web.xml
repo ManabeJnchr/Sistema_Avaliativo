@@ -27,9 +27,19 @@
         <url-pattern>/QuestaoController</url-pattern>
     </servlet-mapping>
 
+    <!-- Servlet de cadastro de avaliações -->
+    <servlet>
+        <servlet-name>AvaliacaoController</servlet-name>
+        <servlet-class>controller.AvaliacaoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AvaliacaoController</servlet-name>
+        <url-pattern>/AvaliacaoController</url-pattern>
+    </servlet-mapping>
+
     <!-- Página inicial do sistema -->
     <welcome-file-list>
-        <welcome-file>HomeAvaliacao.html</welcome-file>
+        <welcome-file>Index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

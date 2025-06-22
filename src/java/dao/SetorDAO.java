@@ -83,4 +83,23 @@ public class SetorDAO {
         ps.close();
         con.close();
     }
+
+    public SetorVO buscarPorId(int id) throws Exception {
+        Connection con = new Conexao().estabeleceConexao();
+        String sql = "SELECT * FROM setor WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        SetorVO setor = null;
+        if (rs.next()) {
+            setor = new SetorVO();
+            setor.setId(rs.getInt("id"));
+            setor.setNome(rs.getString("nome"));
+            // Adicione outros campos se necessário
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return setor;
+    }
 }

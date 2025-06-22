@@ -73,4 +73,15 @@ public class QuestaoDAO {
         ps.close();
         con.close();
     }
+
+    public void editarQuestao(QuestaoVO questao) throws SQLException {
+        Connection con = new Conexao().estabeleceConexao();
+        String sql = "UPDATE questao SET pergunta = ? WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, questao.getPergunta());
+        ps.setInt(2, questao.getId());
+        ps.executeUpdate();
+        ps.close();
+        con.close();
+    }
 }

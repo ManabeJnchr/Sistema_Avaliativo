@@ -107,6 +107,18 @@ public class SetorController extends HttpServlet {
                         response.sendRedirect("ExibeSetores.jsp?result=2");
                     }
                 }
+                
+                // Nova operação sugerida
+                case 6 -> {
+                    try {
+                        List<SetorVO> setores = setorDAO.buscarSetores();
+                        request.setAttribute("lista", setores);
+                        RequestDispatcher rd = request.getRequestDispatcher("/HomeAvaliacao.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception e) {
+                        response.sendRedirect("HomeAvaliacao.jsp?result=2");
+                    }
+                }
             }
         }
     }
