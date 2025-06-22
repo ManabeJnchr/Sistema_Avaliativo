@@ -95,7 +95,6 @@ public class SetorDAO {
             setor = new SetorVO();
             setor.setId(rs.getInt("id"));
             setor.setNome(rs.getString("nome"));
-            // Adicione outros campos se necessário
         }
         rs.close();
         ps.close();

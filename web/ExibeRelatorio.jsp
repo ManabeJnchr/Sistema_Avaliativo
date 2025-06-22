@@ -1,10 +1,9 @@
 <%--
-Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José Victor, Lucas Felipe, Lucas Samuel
+Document : ExibeRelatorio Created on : 17 de jun. de 2025, 22:16:24 Author : José Victor, Lucas Felipe, Lucas Samuel
 --%>
 
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
-<%@page import="vo.SetorVO" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="java.util.Date" %>
 <!DOCTYPE html>
@@ -56,14 +55,9 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                     <div class="col-12 col-sm-10 col-md-8">
                         <h4
                             class="text-center text-black text-decoration-underline fw-bold mb-3">
-                            Setores</h4>
+                            Relatório Avaliativo</h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
-                        <a href="CadastroSetor.jsp"
-                            class="text-decoration-none text-black mx-2"
-                            style="font-size: larger;" title="Cadastrar Setor">
-                            <i class="mdi mdi-domain-plus"></i>
-                        </a>
                         <a href="SetorController?acao=6"
                             class="text-decoration-none text-black mx-2"
                             style="font-size: larger;" title="Home Page">
@@ -78,63 +72,32 @@ Document : ExibeSetores Created on : 17 de jun. de 2025, 22:16:24 Author : José
                             <table class="table table-striped table-hover align-middle">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Data de Cadastro</th>
-                                        <th scope="col">Data de Atualização</th>
-                                        <th scope="col">Ações</th>
+                                        <th scope="col">Setor</th>
+                                        <th scope="col">Nº de Avaliações</th>
+                                        <th scope="col">Nota Média</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                                        List<SetorVO> setores = (List<SetorVO>)
-                                            request.getAttribute("lista");
-                                            if (setores != null && !setores.isEmpty()) {
-                                            for (SetorVO setor : setores) {
+                                    <% List<vo.RelatorioSetorVO> relatorio = (List<vo.RelatorioSetorVO>) request.getAttribute("relatorio");
+                                            if (relatorio != null && !relatorio.isEmpty()) {
+                                            for (vo.RelatorioSetorVO setor : relatorio) {
                                             %>
                                             <tr>
                                                 <td>
-                                                    <%= setor.getNome() %>
+                                                    <%= setor.getNome_setor() %>
                                                 </td>
                                                 <td>
-                                                    <%= setor.getData_cadastro() !=null ?
-                                                        sdf.format(new
-                                                        Date(setor.getData_cadastro().getTime()))
-                                                        : "" %>
+                                                    <%= setor.getQuantidade_avaliacoes() %>
                                                 </td>
                                                 <td>
-                                                    <%= setor.getData_atualizacao() !=null ?
-                                                        sdf.format(new
-                                                        Date(setor.getData_atualizacao().getTime()))
-                                                        : "" %>
-                                                </td>
-                                                <td>
-                                                    <!-- Botão Editar -->
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm me-1"
-                                                        title="Editar" data-bs-toggle="modal"
-                                                        data-bs-target="#modalEditarSetor"
-                                                        data-id="<%= setor.getId() %>"
-                                                        data-nome="<%= setor.getNome() %>">
-                                                        <i class="mdi mdi-pencil"></i>
-                                                    </button>
-                                                    <!-- Botão Inativar -->
-                                                    <form method="post"
-                                                        action="SetorController?acao=4"
-                                                        style="display:inline;">
-                                                        <input type="hidden" name="id_setor"
-                                                            value="<%= setor.getId() %>">
-                                                        <button type="submit"
-                                                            class="btn btn-danger btn-sm"
-                                                            title="Inativar">
-                                                            <i class="mdi mdi-delete"></i>
-                                                        </button>
-                                                    </form>
+                                                    <%= setor.getQuantidade_avaliacoes()> 0
+                                                        ? String.format("%.2f", setor.getMedia_avaliacoes())
+                                                        : "-" %>
                                                 </td>
                                             </tr>
                                             <% } } else { %>
                                                 <tr>
-                                                    <td colspan="4" class="text-center">Nenhum
-                                                        setor cadastrado.</td>
+                                                    <td colspan="3" class="text-center">Nenhuma avaliação realizada.</td>
                                                 </tr>
                                                 <% } %>
                                 </tbody>

@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="dao.SetorDAO" %>
 <%@page import="java.util.List" %>
 <%@page import="vo.SetorVO" %>
 <!DOCTYPE html>
@@ -40,14 +41,20 @@
                             avaliar</h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
+                        <!-- Link para Relatorio Avaliativo -->
+                        <a href="AvaliacaoController?acao=3" id="linkExibeRelatorio" class="text-decoration-none text-black mx-2"
+                            style="font-size: larger;" title="Relatorio Avaliativo">
+                            <i class="mdi mdi-file-table"></i>
+                        </a>
+
                         <!-- Link para Listar Setor -->
-                        <a href="SetorController?acao=2" class="text-decoration-none text-black mx-2"
+                        <a href="SetorController?acao=2" id="linkListarSetores" class="text-decoration-none text-black mx-2"
                             style="font-size: larger;" title="Listar Setor">
                             <i class="mdi mdi-domain"></i>
                         </a>
 
                         <!-- Link para Listar Questões -->
-                        <a href="QuestaoController?acao=2" class="text-decoration-none text-black mx-2"
+                        <a href="QuestaoController?acao=2" id="linkListarQuestoes" class="text-decoration-none text-black mx-2"
                             style="font-size: larger;" title="Listar Questões">
                             <i class="mdi mdi-comment-question"></i>
                         </a>
@@ -57,6 +64,11 @@
                 <div class="row overflow-y-auto" style="max-height: 60vh;">
                     <%
                         List<SetorVO> setores = (List<SetorVO>) request.getAttribute("lista");
+                        if (setores == null) {
+                            SetorDAO setorDAO = new SetorDAO();
+                            setores = setorDAO.buscarSetores();
+                            request.setAttribute("lista", setores);
+                        }
                         if (setores != null && !setores.isEmpty()) {
                             for (SetorVO setor : setores) {
                                 String nome = setor.getNome();
@@ -96,6 +108,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal de Login -->
+        <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="post" action="UsuarioController?acao=1" accept-charset="UTF-8">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #1A80D9;">
+                            <h5 class="modal-title text-white" id="modalLoginLabel">Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="login-nome" class="form-label fw-bold">Usuário</label>
+                                <input type="text" class="form-control" id="login-nome" name="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="login-senha" class="form-label fw-bold">Senha</label>
+                                <input type="password" class="form-control" id="login-senha" name="senha" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-custom-blue">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
@@ -110,6 +150,32 @@
         };
     </script>
     <% } %>
+    <% if ("erro".equals(request.getParameter("login"))) { %>
+    <script>
+        window.onload = function () {
+            var loginModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+            loginModal.show();
+        };
+    </script>
+    <% } %>
+    <%
+        boolean usuarioLogado = (session.getAttribute("usuarioLogado") != null);
+    %>
+    <script>
+        var usuarioLogado = <%= usuarioLogado %>;
+
+        function abrirModalLogin(e) {
+            if (!usuarioLogado) {
+                e.preventDefault();
+                var loginModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+                loginModal.show();
+            }
+        }
+
+        document.getElementById('linkListarSetores').addEventListener('click', abrirModalLogin);
+        document.getElementById('linkListarQuestoes').addEventListener('click', abrirModalLogin);
+        document.getElementById('linkExibeRelatorio').addEventListener('click', abrirModalLogin);
+    </script>
 </body>
 
 </html>

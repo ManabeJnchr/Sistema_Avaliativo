@@ -1,5 +1,7 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.List" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +14,12 @@
 </head>
 
 <body>
+    <% 
+        if (session.getAttribute("usuarioLogado") == null) {
+            response.sendRedirect("HomeAvaliacao.jsp?login=necessario");
+            return;
+        }
+    %>
     <div class="container-fluid">
         <header class="row justify-content-center" style="height: 30vh; background-color: #1A80D9;">
             <div class="col-3 align-content-center text-start h-100">
@@ -29,10 +37,12 @@
             </div>
         </header>
         <div class="row justify-content-center" style="height: 70vh;">
-            <div class="col-11 col-sm-9 col-md-8 rounded-5 py-2" style="background-color: #FFFFFF; position: relative; top: -20px;">
+            <div class="col-11 col-sm-9 col-md-8 rounded-5 py-2"
+                style="background-color: #FFFFFF; position: relative; top: -20px;">
                 <div class="row justify-content-end">
                     <div class="col-12 col-sm-10 col-md-8">
-                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3"> Cadastro de Setor</h4>
+                        <h4 class="text-center text-black text-decoration-underline fw-bold mb-3"> Cadastro de Questões
+                        </h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
                         <!-- Link para Home Page -->
@@ -42,14 +52,14 @@
                         </a>
                     </div>
                 </div>
-                <form method="post" action="SetorController?acao=1" accept-charset="UTF-8">
+                <form method="post" action="QuestaoController?acao=1">
                     <div class="row justify-content-center">
                         <div class="col-8">
                             <div class="mt-5">
-                                <label for="nomeSetor" class="form-label"><span
-                                        class="fw-bold mdi mdi-hospital-building"> Nome do Setor:</span></label>
-                                <input type="text" class="form-control" id="nomeSetor" name="nomeSetor"
-                                    placeholder="Digite o nome do setor...">
+                                <label for="pergunta" class="form-label"><span class="fw-bold mdi mdi-hospital-building">
+                                        Questão:</span></label>
+                                <input type="text" class="form-control" id="pergunta" name="pergunta"
+                                    placeholder="Digite a sua pergunta...">
                             </div>
                         </div>
                     </div>

@@ -46,9 +46,9 @@ public class SetorController extends HttpServlet {
                     setor.setStatus("ativo");
                     try {
                         setorDAO.inserirSetor(setor);
-                        response.sendRedirect("HomeAvaliacao.html");
+                        response.sendRedirect("SetorController?acao=2");
                     } catch (Exception e) {
-                        response.sendRedirect("HomeAvaliacao.html");
+                        response.sendRedirect("SetorController?acao=2");
                     }
                 }
                 

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import vo.AvaliacaoVO;
 import vo.QuestaoVO;
 import vo.SetorVO;
+import vo.RelatorioSetorVO;
 
 /**
  *
@@ -38,7 +39,7 @@ public class AvaliacaoController extends HttpServlet {
         try {
             request.setCharacterEncoding("UTF-8");
             int operacao = Integer.parseInt(request.getParameter("acao"));
-            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO(); // Só aqui!
             QuestaoDAO questaoDAO = new QuestaoDAO();
 
             switch (operacao) {
@@ -95,8 +96,15 @@ public class AvaliacaoController extends HttpServlet {
                         response.sendRedirect("SetorController?acao=6&msg=AvaliacaoFinalizada");
                     }
                 }
+                case 3 -> { // Exibir relatório
+                    List<RelatorioSetorVO> relatorio = avaliacaoDAO.buscarRelatorioPorSetor();
+                    request.setAttribute("relatorio", relatorio);
+                    RequestDispatcher rd = request.getRequestDispatcher("/ExibeRelatorio.jsp");
+                    rd.forward(request, response);
+                }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             response.sendRedirect("HomeAvaliacao.jsp?msg=Erro");
         }
     }

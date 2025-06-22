@@ -47,7 +47,7 @@
                         <h4 class="text-center text-black text-decoration-underline fw-bold mb-3">Questões</h4>
                     </div>
                     <div class="col-12 col-sm-2 d-inline-flex justify-content-end">
-                        <a href="CadastroQuestao.html" class="text-decoration-none text-black mx-2"
+                        <a href="CadastroQuestao.jsp" class="text-decoration-none text-black mx-2"
                             style="font-size: larger;" title="Cadastrar Questão">
                             <i class="mdi mdi-comment-plus"></i>
                         </a>
@@ -167,3 +167,9 @@
 </body>
 
 </html>
+<%
+    if (session.getAttribute("usuarioLogado") == null) {
+        response.sendRedirect("HomeAvaliacao.jsp?login=necessario");
+        return;
+    }
+%>

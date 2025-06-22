@@ -37,6 +37,34 @@
         <url-pattern>/AvaliacaoController</url-pattern>
     </servlet-mapping>
 
+    <!-- Servlet de cadastro de usuários -->
+    <servlet>
+        <servlet-name>UsuarioController</servlet-name>
+        <servlet-class>controller.UsuarioController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsuarioController</servlet-name>
+        <url-pattern>/UsuarioController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Filtro para configuração de codificação -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- Página inicial do sistema -->
     <welcome-file-list>
         <welcome-file>Index.jsp</welcome-file>

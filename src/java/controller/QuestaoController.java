@@ -46,9 +46,9 @@ public class QuestaoController extends HttpServlet {
                     questao.setStatus("ativo");
                     try {
                         questaoDAO.inserirQuestao(questao);
-                        response.sendRedirect("HomeAvaliacao.html");
+                        response.sendRedirect("QuestaoController?acao=2");
                     } catch (Exception e) {
-                        response.sendRedirect("HomeAvaliacao.html");
+                        response.sendRedirect("QuestaoController?acao=2");
                     }
                 }
 
