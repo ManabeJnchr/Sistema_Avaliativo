@@ -73,7 +73,7 @@ Document : ExibeRelatorio Created on : 17 de jun. de 2025, 22:16:24 Author : Jos
                                 <thead class="table-primary">
                                     <tr>
                                         <th scope="col">Setor</th>
-                                        <th scope="col">Nº de Avaliações</th>
+                                        <th scope="col">Nº de Perguntas Respondidas</th>
                                         <th scope="col">Nota Média</th>
                                     </tr>
                                 </thead>

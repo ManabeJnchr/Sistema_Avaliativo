@@ -23,7 +23,7 @@
                     <img style="height: 80%;" src="img/logo_hospital_central.png" alt="Logo do Hospital Central">
                 </a>
                 <h5 class="text-end text-white text-decoration-underline"
-                    style="position: relative; top: -3.5vh; right: -7.4vw;">Sistema de Avaliação e Desenpenho</h4>
+                    style="position: relative; top: -3.5vh; right: -7.4vw;">Sistema de Avaliação e Desempenho</h5>
             </div>
             <div class="col-3 align-content-center text-end h-100">
                 <img style="height: 28vh;" src="img/plus.png" alt="Ícone de adição">
@@ -49,18 +49,18 @@
                 <div class="row overflow-y-auto" style="max-height: 60vh;">
                     <div class="col-12 text-center">
                         <h3>Pergunta ${indice + 1} de ${total}</h3>
-                        <p>${questao.pergunta}</p>
+                        <p class="mt-5" style="font-size: 25px;">${questao.pergunta}</p>
                         <form method="post" action="AvaliacaoController">
                             <input type="hidden" name="acao" value="2">
                             <input type="hidden" name="id_setor" value="${id_setor}">
                             <input type="hidden" name="indice" value="${indice}">
                             <div class="btn-group" role="group">
-                                <button type="submit" name="nota" value="0" class="btn btn-primary mx-1">0</button>
-                                <button type="submit" name="nota" value="1" class="btn btn-primary mx-1">1</button>
-                                <button type="submit" name="nota" value="2" class="btn btn-primary mx-1">2</button>
-                                <button type="submit" name="nota" value="3" class="btn btn-primary mx-1">3</button>
-                                <button type="submit" name="nota" value="4" class="btn btn-primary mx-1">4</button>
-                                <button type="submit" name="nota" value="5" class="btn btn-primary mx-1">5</button>
+                                <button type="submit" name="nota" value="0" class="btn btn-primary mx-1" style="font-size: 40px;">0</button>
+                                <button type="submit" name="nota" value="1" class="btn btn-primary mx-1" style="font-size: 40px;">1</button>
+                                <button type="submit" name="nota" value="2" class="btn btn-primary mx-1" style="font-size: 40px;">2</button>
+                                <button type="submit" name="nota" value="3" class="btn btn-primary mx-1" style="font-size: 40px;">3</button>
+                                <button type="submit" name="nota" value="4" class="btn btn-primary mx-1" style="font-size: 40px;">4</button>
+                                <button type="submit" name="nota" value="5" class="btn btn-primary mx-1" style="font-size: 40px;">5</button>
                             </div>
                         </form>
                     </div>

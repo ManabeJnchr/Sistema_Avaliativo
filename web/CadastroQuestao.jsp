@@ -30,7 +30,7 @@
                     <img style="height: 80%;" src="img/logo_hospital_central.png" alt="Logo do Hospital Central">
                 </a>
                 <h5 class="text-end text-white text-decoration-underline"
-                    style="position: relative; top: -3.5vh; right: -7.4vw;">Sistema de Avaliação e Desenpenho</h4>
+                    style="position: relative; top: -3.5vh; right: -7.4vw;">Sistema de Avaliação e Desempenho</h5>
             </div>
             <div class="col-3 align-content-center text-end h-100">
                 <img style="height: 28vh;" src="img/plus.png" alt="Ícone de adição">
